@@ -1,1 +1,1 @@
-println 'hello glide'
+forward "/index.gtpl"
