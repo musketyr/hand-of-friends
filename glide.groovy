@@ -9,3 +9,9 @@ web {
         '*' : ['/feed']
     ]
 }
+
+layout {
+    mappings = [
+            "/*": "/_layout.gtpl"
+    ]
+}
