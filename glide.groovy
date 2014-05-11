@@ -6,7 +6,7 @@ app {
 
 web {
     security = [
-        '*' : ['/feed', '/join/**', '/invite', '/comment', '/friends']
+        '*' : ['/feed', '/join/**', '/invite', '/comment', '/friends', "/search"]
     ]
 }
 

@@ -7,6 +7,16 @@
   <body>
       <div class="row">
         <div class="col-md-12">
+          <% if (request.search) { %>
+          <form role="form" method="GET" action="/search">
+            <div class="input-group">
+              <input type="text" class="form-control" name="query" placeholder="Search your feed ..." required value="${params.query ?: ''}">
+              <span class="input-group-btn">
+                <button class="btn btn-primary" type="submit">Search</button>
+              </span>
+            </div>
+          </form>
+          <% } else { %>
           <form role="form" method="POST" action="/feed">
             <div class="input-group">
               <input type="text" class="form-control" name="message" placeholder="Share something valuable ..." required>
@@ -15,6 +25,7 @@
               </span>
             </div>
           </form>
+          <% } %>
         </div>
       </div>
       <hr/>
@@ -26,6 +37,7 @@
               <% post.comments.each { comment -> %>
                 <footer class="post-comment"><strong>$comment.displayName</strong> $comment.text</footer>
               <% } %>
+              <% if (!request.search) { %>
               <div class="row">
                 <div class="comment-form col-md-12">
                   <form role="form" method="POST" action="/comment">
@@ -39,6 +51,7 @@
                   </form>
                 </div>
               </div>
+              <% } %>
             </blockquote>
           </div>
         <% } %>

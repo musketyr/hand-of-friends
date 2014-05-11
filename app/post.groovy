@@ -15,9 +15,20 @@ if (!domainUser) {
   domainUser.save()
 }
 
-def viewers = domainUser.friends ?: []
-viewers << user.userId
+def theViewers = domainUser.friends ?: []
+theViewers << user.userId
 
-new domain.Post(message: params.message as String, userId: user.userId, viewers: viewers, displayName: user.nickname ?: user.email).save()
+def post = new domain.Post(message: params.message as String, userId: user.userId, viewers: theViewers, displayName: user.nickname ?: user.email)
+post.save()
+
+def index = search.index('Post')
+
+index.put {
+  document(id: "$post.id") {
+    message   text: post.message
+    created   date: post.created
+    viewers   atom: post.viewers
+  }
+}
 
 redirect "/feed"

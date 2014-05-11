@@ -1,5 +1,6 @@
 get   "/",            forward: "/index.groovy"
 get   "/feed",        forward: "/feed.groovy"
+get   "/search",      forward: "/searchFeed.groovy"
 post  "/feed",        forward: "/post.groovy"
 post  "/comment",     forward: "/comment.groovy"
 post  "/invite",      forward: "/invite.groovy"

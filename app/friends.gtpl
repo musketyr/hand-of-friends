@@ -21,11 +21,11 @@
       <div class="row">
         <div class="col-md-12">
           <h3>Your Friends</h3>
-          <ul>
+          <ul class="list-group">
           <% request.friends.each { fid ->
               def friend = domain.User.get(fid)
           %>
-                <li>$friend.nickname ($friend.email)</li>
+                <li class="list-group-item"><strong>$friend.nickname</strong> ($friend.email)</li>
           <% } %>
           </ul>
         </div>
