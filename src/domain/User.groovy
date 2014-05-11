@@ -7,4 +7,6 @@ import groovyx.gaelyk.datastore.*
     @Indexed List<String> friends
     @Indexed String email
     @Indexed String nickname
+    String avatarKey
+    String avatarUrl
 }

@@ -33,6 +33,7 @@
           <% if (user) { %>
           <li class="${request.originalURI == '/feed' ? 'active' : ''}"><a href="/feed">Feed</a></li>
           <li class="${request.originalURI == '/friends' ? 'active' : ''}"><a href="/friends">Friends</a></li>
+          <li class="${request.originalURI == '/profile' ? 'active' : ''}"><a href="/profile">Profile</a></li>
           <li class="${request.originalURI == '/search' ? 'active' : ''}"><a href="/search">Search</a></li>
           <li><a href="${users.createLogoutURL('/')}">Log out</a></li>
           <% } else { %>

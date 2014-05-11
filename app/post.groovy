@@ -18,7 +18,7 @@ if (!domainUser) {
 def theViewers = domainUser.friends ?: []
 theViewers << user.userId
 
-def post = new domain.Post(message: params.message as String, userId: user.userId, viewers: theViewers, displayName: user.nickname ?: user.email)
+def post = new domain.Post(message: params.message as String, userId: user.userId, viewers: theViewers, displayName: domainUser.nickname ?: domainUser.email)
 post.save()
 
 def index = search.index('Post')
