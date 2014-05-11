@@ -13,6 +13,6 @@ if (!user) {
   return
 }
 
-new domain.Comment(text: params.text as String, authorId: user.userId, post: ['Post', params.id as Long] as com.google.appengine.api.datastore.Key).save()
+new domain.Comment(text: params.text as String, authorId: user.userId, post: ['Post', params.id as Long] as com.google.appengine.api.datastore.Key, displayName: user.nickname ?: user.email).save()
 
 redirect "/feed"

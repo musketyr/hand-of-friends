@@ -4,6 +4,7 @@ import groovyx.gaelyk.datastore.*
 
 @Entity class Post {
     String message
+    String displayName
     @Indexed String userId
     @Indexed List<String> viewers
     @Indexed Date created = new Date()
@@ -12,14 +13,15 @@ import groovyx.gaelyk.datastore.*
       def theKey = ['Post', datastoreKey] as com.google.appengine.api.datastore.Key
         Comment.findAll {
             ancestor theKey
-            sort desc by created
+            sort asc by created
         }
     }
 
-    static List<Post> findAllByUser(String theUserId) {
+    static List<Post> findAllByUser(String theUserId, Map params = [:]) {
         Post.findAll {
-            where userId == theUserId
+            where viewers == theUserId
             sort desc by created
+            paginate params
         }
     }
 

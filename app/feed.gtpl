@@ -22,9 +22,9 @@
         <% request.posts.each { post -> %>
           <div class="col-md-12">
             <blockquote>
-              <p class="post-message">$post.message</p>
+              <p class="post-message"><strong>$post.displayName</strong> $post.message</p>
               <% post.comments.each { comment -> %>
-                <footer class="post-comment">$comment.text</footer>
+                <footer class="post-comment"><strong>$comment.displayName</strong> $comment.text</footer>
               <% } %>
               <div class="row">
                 <div class="comment-form col-md-12">
