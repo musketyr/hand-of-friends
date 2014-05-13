@@ -30,31 +30,52 @@
       </div>
       <hr/>
       <div class="row">
-        <% request.posts.each { post -> %>
-          <div class="col-md-12">
-            <blockquote>
-              <p class="post-message"><strong>$post.displayName</strong> $post.message</p>
-              <% post.comments.each { comment -> %>
-                <footer class="post-comment"><strong>$comment.displayName</strong> $comment.text</footer>
-              <% } %>
-              <% if (!request.search) { %>
-              <div class="row">
-                <div class="comment-form col-md-12">
-                  <form role="form" method="POST" action="/comment">
-                    <input type="hidden" name="id" value="$post.id">
-                    <div class="input-group input-group-sm">
-                      <input type="text" class="form-control" name="text" placeholder="Commnet only if you have something to valuable to say ..." required>
-                      <span class="input-group-btn">
-                        <button class="btn btn-default" type="submit">Comment</button>
-                      </span>
+        <div class="col-md-12">
+          <ul class="media-list">
+            <% request.posts.each { post -> %>
+              <li class="media">
+                <a class="pull-left">
+                  <img class="media-object" width="64px" height="64px" src="${post.imageUrl ? post.imageUrl : 'http://placekitten.com/64/64?size='}=s64-c" alt="$post.displayName">
+                </a>
+                <div class="media-body">
+                  <% def comments = post.comments %>
+                  <h4 class="media-heading">$post.displayName</h4>
+                  <p class="post-message ${comments ? 'with-comments' : 'without-comments'}">$post.message</p>
+                  <% if (comments) { %>
+                    <ul class="media-list">
+                      <% post.comments.each { comment -> %>
+                          <li class="media">
+                            <a class="pull-left">
+                              <img class="media-object" width="64px" height="64px" src="${comment.imageUrl ? comment.imageUrl : 'http://placekitten.com/64/64?size='}=s64-c" alt="$comment.displayName">
+                            </a>
+                            <div class="media-body">
+                              <h4 class="media-heading">$comment.displayName</h4>
+                              <p>$comment.text</p>
+                            </div>
+                          </li>
+                      <% } %>
+                    </ul>
+                  <% } %>
+                  <% if (!request.search) { %>
+                  <div class="row">
+                    <div class="comment-form col-md-12  ${comments ? 'with-comments' : 'without-comments'}">
+                      <form role="form" method="POST" action="/comment">
+                        <input type="hidden" name="id" value="$post.id">
+                        <div class="input-group input-group-sm">
+                          <input type="text" class="form-control" name="text" placeholder="Comment only if you have something valuable to say ..." required>
+                          <span class="input-group-btn">
+                            <button class="btn btn-default" type="submit">Comment</button>
+                          </span>
+                        </div>
+                      </form>
                     </div>
-                  </form>
+                  </div>
+                  <% } %>
                 </div>
-              </div>
-              <% } %>
-            </blockquote>
-          </div>
-        <% } %>
+              </li>
+            <% } %>
+          </ul>
+        </div>
       </div>
   </body>
 </html>

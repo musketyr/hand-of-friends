@@ -1,0 +1,12 @@
+.avatar-container {
+  padding-top: 15px;
+  padding-bottom: 15px;
+}
+
+.post-message.with-comments {
+  min-height: 44px;
+}
+
+.comment-form.with-comments {
+  padding-top: 15px;
+}

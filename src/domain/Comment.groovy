@@ -10,5 +10,6 @@ import com.google.appengine.api.datastore.Key
     @Indexed String authorId
     String displayName
     String text
+    String imageUrl
     @Indexed Date created = new Date()
 }

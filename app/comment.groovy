@@ -20,7 +20,7 @@ if (!domainUser) {
   domainUser.save()
 }
 
-def comment = new domain.Comment(text: params.text as String, authorId: user.userId, post: ['Post', params.id as Long] as com.google.appengine.api.datastore.Key, displayName: domainUser.nickname ?: user.email)
+def comment = new domain.Comment(text: params.text as String, authorId: user.userId, post: ['Post', params.id as Long] as com.google.appengine.api.datastore.Key, displayName: domainUser.nickname ?: user.email, imageUrl: domainUser.avatarUrl)
 comment.save()
 
 def post = domain.Post.get(params.id as Long)

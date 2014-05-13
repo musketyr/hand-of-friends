@@ -15,6 +15,7 @@ datastore.iterate {
   where userId == params.id
 } each {
   it.displayName = domainUser.nickname
+  it.imageUrl    = domainuser.avatarUrl
   it.save()
 }
 
@@ -23,5 +24,6 @@ datastore.iterate {
   where authorId == params.id
 } each {
   it.displayName = domainUser.nickname
+  it.imageUrl    = domainUser.avatarUrl
   it.save()
 }

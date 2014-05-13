@@ -8,6 +8,7 @@ import groovyx.gaelyk.datastore.*
     @Indexed String userId
     @Indexed List<String> viewers
     @Indexed Date created = new Date()
+    String imageUrl
 
     List<Comment> getComments() {
       def theKey = ['Post', datastoreKey] as com.google.appengine.api.datastore.Key
