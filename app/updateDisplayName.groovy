@@ -15,7 +15,7 @@ datastore.iterate {
   where userId == params.id
 } each {
   it.displayName = domainUser.nickname
-  it.imageUrl    = domainuser.avatarUrl
+  it.imageUrl    = domainUser.avatarUrl
   it.save()
 }
 
@@ -27,3 +27,5 @@ datastore.iterate {
   it.imageUrl    = domainUser.avatarUrl
   it.save()
 }
+
+memcache.clearAll()

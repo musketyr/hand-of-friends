@@ -5,7 +5,7 @@ import groovyx.gaelyk.datastore.Parent
 import groovyx.gaelyk.datastore.Indexed
 import com.google.appengine.api.datastore.Key
 
-@Entity class Comment {
+@Entity class Comment implements Serializable {
     @Parent Key post
     @Indexed String authorId
     String displayName

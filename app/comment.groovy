@@ -24,6 +24,8 @@ def comment = new domain.Comment(text: params.text as String, authorId: user.use
 comment.save()
 
 def post = domain.Post.get(params.id as Long)
+post.clearCachedComments()
+
 
 def index = search.index('Post')
 

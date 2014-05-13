@@ -10,16 +10,17 @@
           <% if (request.search) { %>
           <form role="form" method="GET" action="/search">
             <div class="input-group">
-              <input type="text" class="form-control" name="query" placeholder="Search your feed ..." required value="${params.query ?: ''}">
+              <input type="text" class="form-control" autofocus="autofocus" name="query" placeholder="Search your feed ..." required value="${params.query ?: ''}">
               <span class="input-group-btn">
                 <button class="btn btn-primary" type="submit">Search</button>
               </span>
             </div>
+            <span class="help-block">Showing up to ten latest results only.</span>
           </form>
           <% } else { %>
           <form role="form" method="POST" action="/feed">
             <div class="input-group">
-              <input type="text" class="form-control" name="message" placeholder="Share something valuable ..." required>
+              <input type="text" class="form-control" autofocus="autofocus" name="message" placeholder="Share something valuable ..." required>
               <span class="input-group-btn">
                 <button class="btn btn-primary" type="submit">Post</button>
               </span>
@@ -29,6 +30,14 @@
         </div>
       </div>
       <hr/>
+      <% if (!request.search && params.from) { %>
+      <div class="row">
+        <div class="col-md-12">
+          <a href="/feed${params.from == 'newest' ? '' : ('?cursor=' + params.from)}" class="btn btn-default show-more">Show Newer Posts</a>
+        </div>
+      </div>
+      <hr/>
+      <% } %>
       <div class="row">
         <div class="col-md-12">
           <ul class="media-list">
@@ -77,5 +86,13 @@
           </ul>
         </div>
       </div>
+      <% if (!request.search && request.posts.cursor && request.posts.size() == 10) { %>
+      <hr/>
+      <div class="row">
+        <div class="col-md-12">
+          <a href="/feed?cursor=${request.posts.cursor.toWebSafeString()}&from=${params.cursor ?: 'newest'}" class="btn btn-default show-more">Show Older Posts</a>
+        </div>
+      </div>
+      <% } %>
   </body>
 </html>

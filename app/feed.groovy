@@ -10,6 +10,8 @@ if (!domainUser) {
   domainUser.save()
 }
 
-request.posts = domain.Post.findAllByUser(user.userId)
+params.limit = 10
+
+request.posts = domain.Post.findAllByUser(user.userId, params)
 
 forward "/feed.gtpl"

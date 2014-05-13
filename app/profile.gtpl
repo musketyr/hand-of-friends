@@ -9,7 +9,7 @@
         <h3>User Profile</h3>
         <div class="col-md-9 col-md-offset-3 avatar-container">
           <% if (request.user.avatarUrl) { %>
-              <img src="${request.user.avatarUrl}=s140-c" alt="${request.user.nickname}'s Avatar" class="img-thumbnail">
+              <img src="${request.user.avatarUrl}=s140-c" width="140px" height="140px" alt="${request.user.nickname}'s Avatar" class="img-thumbnail">
           <% } %>
         </div>
         <div class="col-md-12">

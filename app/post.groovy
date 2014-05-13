@@ -21,6 +21,8 @@ theViewers << user.userId
 def post = new domain.Post(message: params.message as String, userId: user.userId, viewers: theViewers, displayName: domainUser.nickname ?: domainUser.email, imageUrl: domainUser.avatarUrl)
 post.save()
 
+domain.Post.clearCachedPosts(domainUser.id)
+
 def index = search.index('Post')
 
 index.put {

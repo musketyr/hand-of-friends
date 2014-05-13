@@ -11,6 +11,15 @@ if (!params.query) {
   return
 }
 
+if (memcache["posts:search:valid" as String]) {
+  def cached = memcache["posts:search:${user.userId}:query:${params.query}" as String]
+  if (cached) {
+    request.posts = cached
+    forward "/feed.gtpl"
+    return
+  }
+}
+
 def documents = search.search {
   select ids from Post
   sort desc by created, new Date(0)
@@ -22,5 +31,8 @@ def documents = search.search {
 request.posts = documents.collect {
   domain.Post.get(it.id as Long)
 }
+
+memcache["posts:search:valid" as String] = true
+memcache["posts:search::${user.userId}:query:${params.query}" as String] = request.posts
 
 forward "/feed.gtpl"
